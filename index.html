@@ -1,0 +1,237 @@
+<html>
+<head>
+    <title>VNA Coding Club, Week 2</title>
+
+    <link href="helpers/styles.css" rel="stylesheet" />
+
+    <script src="helpers/helper_methods.js"></script>
+    <script type="text/javascript">window.addEventListener('error', onError);</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <h1 class="headline">VNA Coding Club, Week 2</h1>
+
+    <div class="wrapper">
+        <div class="wrapper-direct-child">
+            <div class="button-row">
+                <button id="prev-btn" onclick="prevInstructions()"><-</button>
+                <button id="next-btn" onclick="nextInstructions()">-></button>
+            </div>
+            <div id="instructions"></div>
+        </div>
+        
+        <div class="wrapper-direct-child">
+            <button id="execute-button" onclick="executeBtn()"></button>
+
+            <div id="success-msg" onclick="location.reload()"></div>
+
+            <div>Output:</div>
+            <pre id="error"></pre>
+            
+            <pre id="console">... this is where the code output will go...</pre>
+        </div>
+    </div>
+
+    
+<!-- Step-by-step instructions, in Markdown -->
+<script id="step0" type="text/plain">
+# Step 0
+
+Welcome back!
+
+This week, we're going to work on working with
+text. But in order to do that, we're going to 
+need to have finished all the way through Step 3
+of last week's exercises.
+
+If you haven't finished that yet, feel free to
+go back and finish that now, and we'll see you
+when you're done.
+
+> **REVIEW**: to proceed, go ahead and update
+`step_0.js` to `log()` a message that says
+"I finished Step 3 of Week 1", just to confirm
+that you're all caught up!
+</script>
+
+<script id="step1" type="text/plain">
+# Step 1
+
+Alright, let's talk about working with text!
+
+## Strings - a quick review
+
+We've worked with `strings` before, which is the
+type of variable we use to represent text. You
+can define a text value by wrapping it in quotes,
+and you can do things like check the length of text:
+
+```
+let x = 'this is a string!';
+let y = x.length; // 17
+```
+
+> **Check-in**: does it make sense why the value of `y`
+is 17 in the above example? It's because the string `this is a string`
+is 17 characters long (a "character" is a letter, a space, or the `!` in the
+above example)
+
+## Combining strings
+
+When working with strings, some common operations like `+` take on a different
+meaning. When you have something like `2+3`, that's basic math and equals `5`,
+but when you add two strings together, you're telling the computer to combine
+the strings together into a new longer string:
+
+```
+let x = 'Valor';
+let y = ' ';
+let z = 'North-Austin';
+
+let schoolName = x + y + z; // 'Valor North-Austin'
+```
+
+> **Check-in**: what would happen if you just did `x+z` instead?
+Instead, you would get `'ValorNorth-Austin'`, keep in mind that a space
+counts as a character.
+
+## Challenge Time
+
+Ok, for the challenge for Step 1, we're going to write a simple function that
+gets two strings as parameters, and:
+
+* logs each string
+* logs how long each string is
+* combines the two strings into a single longer string
+* logs that longer string
+* logs how long that longer string is
+
+Got all that? Awesome, let's get started!
+
+> **Challenge**: update `step_1.js` to do the 5 criteria listed above
+
+
+</script>
+
+<script id="step2" type="text/plain">
+# Step 2
+
+Let's chat real quick about empty strings:
+
+## Empty strings
+
+Suppose you had something like:
+
+```
+let x = '';
+```
+
+In this example, `x` is what we'd call an "empty" string,
+a string of length `0`, which contains no characters.
+
+**Why would we want this??**
+
+Well, empty strings can be really helpful when used with the `+=` operator,
+which takes a string value, adds something to the end of it, and assigns the
+new longer value to the same variable. For example:
+
+```
+let x = '';
+for (let i = 0; i < 3; i++) {
+    x += 'Banana';
+}
+
+// x == 'BananaBananaBanana'
+```
+
+So by starting with an empty string, we can then use some logic in our code
+to make that string longer and more intersting by using `+=` to add parts of
+the string to the end.
+
+## Challenge: Leftpad
+
+In the fall, I mentioned a famous method called `leftpad()`, that takes a string
+and a desired length, and it returns the string with the proper number of spaces
+in front of it so that the returned string is the desired length.
+
+It's maybe easier to see with an example:
+
+```
+let x = leftpad('foo', 5); // x == '  foo'
+let y = leftpad('foo', 6); // x == '   foo'
+let z = leftpad('foo', 3); // x == 'foo'
+```
+
+For this challenge, you're going to implement this logic yourself!
+
+* If `inputString` is shorter than `desiredLength`, the function should return
+a new string that starts with the correct number of spaces, and ends with `inputString`
+* If `inputString` is already longer than `desiredLength`, the function should
+just return a string "ERROR"
+
+> Open `step_2.js` and implement the logic in `leftpad()`!
+
+
+</script>
+<script id="step3" type="text/plain">
+# Step 3
+
+Let's talk about a really powerful method: `split()`
+
+## Splitting a string
+
+You can call a method `split(' ')` on a string, and it will
+look for all the spaces in that string, and split it up, returning
+an array of smaller strings. Picture taking a newspaper, and a pair
+of scissors, and cutting out each word in a paragraph:
+
+```
+let x = 'Valor North Austin';
+let y = x.split(' ');
+
+// y = ['Valor', 'North', 'Austin']
+```
+
+So in the above example, `y` is an array with 3 strings in it, and
+the computer built that array by looking for the `' '` spaces, and
+splitting up the original string `'Valor North Austin'`.
+
+> **Check in**: what would the value of `'Coding Club'.split(' ')`
+be? It would be an array with 2 strings in it: `['Coding', 'Club']`
+
+Something really powerful is that you can call `split()` with things
+other than spaces. For example, what if you wanted to split up a
+string with a comma-separated list?
+
+```
+let x = 'One,Two,Three';
+
+let y = x.split(',');
+
+// y = ['One', 'Two', 'Three']
+```
+
+## Why splitting a string can be useful
+
+If you split up a string into a bunch of smaller strings (for example,
+all the words in the original string), you can answer some interesting
+questions about the original string:
+
+* How many words were in the original string?
+* What was the 3rd word in the original string?
+* How many times was a specific word used?
+
+And with that in mind, let's get on to the challenge!
+
+> **Challenge**: Open `step_3.js`, and implement the method so that it splits up `inputString`
+into an array of words, and logs the right info about that original string
+
+</script>
+
+    <!-- This script runs at the end, intentionally -->
+    <script>
+        documentReady();
+    </script>
+</body>
+</html>
